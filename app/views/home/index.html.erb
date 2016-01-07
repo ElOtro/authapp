@@ -1,0 +1,12 @@
+<% content_for :top_content do %>
+  <div class="jumbotron">
+    <div class="container">
+      <h1>Основная страница</h1>
+      <p>
+        <%= link_to 'Войти как пользователь', user_session_path, class: 'btn btn-primary btn-lg' %>
+        <%= link_to 'Войти как компания', company_session_path, class: 'btn btn-primary btn-lg' %>
+        <%#= link_to 'Войти как пользователь компании', member_session_path, class: 'btn btn-primary btn-lg' %>
+      </p>
+    </div>
+  </div>
+<% end %>

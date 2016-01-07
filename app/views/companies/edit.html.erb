@@ -1,0 +1,57 @@
+<div class="row">
+	<div class="col-md-12">
+		<h4>
+			<% if current_company %>
+ 				<%= "Здравствуйте, владелец компании #{current_company.name}" %>
+ 			<% else %>
+ 				<%= "Здравствуйте, пользователь #{current_member.user.name} компании #{current_member.company.name}" %>
+ 			<% end %>
+ 		</h4>
+ 	</div>
+</div>
+<div class="row">
+	<div class="col-md-12">
+		<div class="form-group">
+			<% if current_company %>
+ 				<%= link_to 'Выйти как компания', destroy_company_session_path, :method => :delete, class: 'btn btn-primary btn-sm' %>
+ 			<% else %>
+ 				<%= link_to 'Выйти как пользователь компании', destroy_member_session_path, :method => :delete, class: 'btn btn-primary btn-sm' %>
+ 			<% end %>
+ 		</div>
+ 	</div>
+</div>
+
+<div class="row">
+	<% if current_company %>
+	<div class="col-md-12">
+ 		<%= form_for @member, url: addmember_company_path(current_company), method: :post do |f| %>
+		  	
+		  <div class="form-group">
+		     <%= f.select :user_id, options_from_collection_for_select(@users, "id", "email") %>
+		  </div>	
+
+		  <div class="form-group">
+		     <%= f.text_field :password %>
+		  </div>
+
+		  <div class="form-group">
+		     <%= f.text_field :password_confirmation %>
+		  </div>
+
+		  <%= f.hidden_field :company_id, :value => current_company.id %>
+
+		  <div class="form-actions">
+		    <%= f.button :submit, class: "btn btn-primary btn-sm" %>
+		  </div>
+		<% end %>
+ 	</div>
+ 	<p>Список пользователей компании</p>
+ 	<div class="col-md-12">
+ 		<% @company_users.each do |company_user| %>
+ 			<ul>
+ 				<li><%= "#{company_user.name} (#{company_user.email})" %></li>
+ 			</ul>
+ 		<% end %>
+ 	</div>
+ 	<% end %>
+</div>
