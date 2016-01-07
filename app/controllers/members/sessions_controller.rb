@@ -3,7 +3,7 @@ class Members::SessionsController < Devise::SessionsController
 
   # GET /resource/sign_in
   def new
-    @company_id = params[:company_id]
+    @company = Company.find(params[:company_id])
     @email = params[:email]
     super
   end
