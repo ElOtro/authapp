@@ -4,6 +4,7 @@ class UsersController < ApplicationController
 	
 	def edit
 		@companies = @user.companies
+		@dialogs   = Dialog.all
 	end
 
 

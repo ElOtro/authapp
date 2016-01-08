@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :messages
+  resources :dialogs
   devise_for :companies
   devise_for :users, :controllers => {sessions: 'users/sessions', :registrations => "users/registrations", :passwords => "users/passwords"}
   devise_for :members, :controllers => {sessions: 'members/sessions', :registrations => "members/registrations", :passwords => "members/passwords"}

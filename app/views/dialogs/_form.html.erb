@@ -1,0 +1,47 @@
+<div class="row">
+  <div class="col-md-12">
+  <%= form_for(@dialog) do |f| %>
+    <% if @dialog.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@dialog.errors.count, "error") %> prohibited this dialog from being saved:</h2>
+
+        <ul>
+        <% @dialog.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <% if @dialog.new_record? %>
+        <%= f.hidden_field :owner_id, value: @dialog.owner_id %>
+        <div class="form-group">
+          <%= f.label :subject %><br />
+          <%= f.text_field :subject, class: "form-control" %>
+        </div>
+        <div class="actions">
+          <%= f.submit "Создать", class: "btn btn-primary" %>
+        </div>
+    <% else %>
+        <% @dialog.messages.order(:created_at).each do |message| %>
+          <div class="list-group">
+            <%= "#{message.body} (#{message.created_at}) от #{message.sender.name}" %>
+          </div>
+        <% end %> 
+    <% end %>
+    
+  <% end %>
+  <% if not @dialog.new_record? %>
+    <%= form_for(@dialog.messages.new) do |f| %>
+      <%= f.hidden_field :dialog_id, value: @dialog.id %>
+      <%= f.hidden_field :sender_id, value: @sender.id %>
+      <div class="form-group">
+        <%= f.label :body %><br />
+        <%= f.text_field :body, class: "form-control" %>
+      </div>
+      <div class="actions">
+        <%= f.submit "Отправить", class: "btn btn-primary" %>
+      </div>
+    <% end %> 
+  <% end %>
+  </div>
+</div>
