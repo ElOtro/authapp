@@ -3,6 +3,7 @@ class CreateMessages < ActiveRecord::Migration
     create_table :messages do |t|
       t.references :dialog, index: true, foreign_key: true
       t.integer    :sender_id, index: true
+      t.integer    :recipient_id, index: true
       t.text       :body
 
       t.timestamps null: false

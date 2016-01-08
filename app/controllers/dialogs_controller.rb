@@ -15,6 +15,7 @@ class DialogsController < ApplicationController
   # GET /dialogs/new
   def new
     @dialog = Dialog.new(owner_id: current_user.id)
+    @users = User.all
   end
 
   # GET /dialogs/1/edit
@@ -70,6 +71,6 @@ class DialogsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def dialog_params
-      params.require(:dialog).permit(:owner_id, :subject)
+      params.require(:dialog).permit(:owner_id, :recipient_id, :subject)
     end
 end

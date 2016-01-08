@@ -18,6 +18,9 @@
           <%= f.label :subject %><br />
           <%= f.text_field :subject, class: "form-control" %>
         </div>
+        <div class="form-group">
+           <%= f.select :recipient_id, options_from_collection_for_select(@users, "id", "email") %>
+        </div>  
         <div class="actions">
           <%= f.submit "Создать", class: "btn btn-primary" %>
         </div>
@@ -34,6 +37,7 @@
     <%= form_for(@dialog.messages.new) do |f| %>
       <%= f.hidden_field :dialog_id, value: @dialog.id %>
       <%= f.hidden_field :sender_id, value: @sender.id %>
+      <%= f.hidden_field :recipient_id, value: @dialog.recipient_id %>
       <div class="form-group">
         <%= f.label :body %><br />
         <%= f.text_field :body, class: "form-control" %>

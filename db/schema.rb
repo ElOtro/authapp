@@ -37,10 +37,14 @@ ActiveRecord::Schema.define(version: 20160108113929) do
 
   create_table "dialogs", force: :cascade do |t|
     t.integer  "owner_id"
+    t.integer  "recipient_id"
     t.string   "subject"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
+
+  add_index "dialogs", ["owner_id"], name: "index_dialogs_on_owner_id", using: :btree
+  add_index "dialogs", ["recipient_id"], name: "index_dialogs_on_recipient_id", using: :btree
 
   create_table "members", force: :cascade do |t|
     t.integer  "company_id"
@@ -66,12 +70,14 @@ ActiveRecord::Schema.define(version: 20160108113929) do
   create_table "messages", force: :cascade do |t|
     t.integer  "dialog_id"
     t.integer  "sender_id"
+    t.integer  "recipient_id"
     t.text     "body"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
   add_index "messages", ["dialog_id"], name: "index_messages_on_dialog_id", using: :btree
+  add_index "messages", ["recipient_id"], name: "index_messages_on_recipient_id", using: :btree
   add_index "messages", ["sender_id"], name: "index_messages_on_sender_id", using: :btree
 
   create_table "users", force: :cascade do |t|

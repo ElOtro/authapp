@@ -4,7 +4,7 @@ class UsersController < ApplicationController
 	
 	def edit
 		@companies = @user.companies
-		@dialogs   = Dialog.all
+		@dialogs   = Dialog.where("recipient_id = ? OR owner_id = ?", current_user.id, current_user.id)
 	end
 
 
