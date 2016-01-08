@@ -9,7 +9,6 @@ class CompaniesController < ApplicationController
 
 	def addmember
 		user = User.find(params[:member][:user_id])
-		params[:member].merge(dkd: '3')
 		@member = Member.new({ email: user.email, password: params[:member][:password], 
 			                     password_confirmation: params[:member][:password_confirmation], 
 			                     company_id: params[:member][:company_id], user_id: params[:member][:user_id] })
