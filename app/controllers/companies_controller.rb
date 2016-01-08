@@ -1,6 +1,7 @@
 class CompaniesController < ApplicationController
 	before_filter :deny_to_other
   before_action :set_company, only: [:edit, :addmember]
+
 	def edit
 		@member = Member.new
 		@users = User.all

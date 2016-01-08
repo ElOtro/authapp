@@ -48,11 +48,13 @@ group :development do
   gem 'spring'
 end
 
-gem "autoprefixer-rails"
-gem "capistrano"
+gem 'autoprefixer-rails'
+gem 'capistrano'
 gem 'puma'
 gem 'devise'
 gem 'bootstrap-sass'
+gem 'kaminari'
+gem 'font-awesome-sass', '~> 4.2.0'
 gem 'faker'
 gem 'stringex'
 
