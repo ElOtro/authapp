@@ -11,8 +11,24 @@
   </div>
 <% end %>
 
+<div class="row" style="margin-bottom: 15px;">
+  <div class="col-md-4">
+    <%= select_tag 'parent_id', options_for_select(nested_set_options(Category) {|i| "#{'-' * i.level} #{i.name}" } ), class: "form-control input-sm", id: "category_select" %>
+  </div>
+</div>
 <div class="row">
   <div class="col-md-12 table_journal">
     <%= render "journal" %>
   </div>
 </div>
+<script type="text/javascript">
+  $( "#category_select" ).change(function() {
+    var category_id = $(this).val();
+    $.ajax({
+          type: 'GET',
+          url: '/',
+          data: {category_id: category_id},
+          dataType: 'script'
+   });
+  });
+</script>

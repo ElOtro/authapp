@@ -11,10 +11,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160108113929) do
+ActiveRecord::Schema.define(version: 20160109150507) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "categories", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "parent_id"
+    t.integer  "lft",                        null: false
+    t.integer  "rgt",                        null: false
+    t.integer  "depth",          default: 0, null: false
+    t.integer  "children_count", default: 0, null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
+
+  add_index "categories", ["lft"], name: "index_categories_on_lft", using: :btree
+  add_index "categories", ["parent_id"], name: "index_categories_on_parent_id", using: :btree
+  add_index "categories", ["rgt"], name: "index_categories_on_rgt", using: :btree
 
   create_table "companies", force: :cascade do |t|
     t.string   "name"
@@ -30,8 +45,10 @@ ActiveRecord::Schema.define(version: 20160108113929) do
     t.inet     "last_sign_in_ip"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
+    t.integer  "category_id"
   end
 
+  add_index "companies", ["category_id"], name: "index_companies_on_category_id", using: :btree
   add_index "companies", ["email"], name: "index_companies_on_email", unique: true, using: :btree
   add_index "companies", ["reset_password_token"], name: "index_companies_on_reset_password_token", unique: true, using: :btree
 

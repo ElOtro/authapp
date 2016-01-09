@@ -57,4 +57,6 @@ gem 'kaminari'
 gem 'font-awesome-sass', '~> 4.2.0'
 gem 'faker'
 gem 'stringex'
+gem 'awesome_nested_set'
+
 
